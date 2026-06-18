@@ -7,7 +7,8 @@ int my_getline(char arr[], int max){
   int len = 0;
   int mode = OUT;
   int c;
-  while((c = getchar()) != EOF && c != '\n'){
+  //conditions broken. blanks are removed entirely.
+  while((c = getchar()) != EOF && c != '\n' && len < (MAXLEN - 1)){
     if((c != ' ' && c != '\t') && mode == OUT){
       mode = IN;
       arr[len] = c;
@@ -17,7 +18,7 @@ int my_getline(char arr[], int max){
       arr[len] = c;
       ++len;
     }
-    else if((c == ' ' && c == '\t') && mode == IN){
+    else if((c == ' ' || c == '\t') && mode == IN){
       mode = OUT;
       arr[len] = c;
       ++len;
@@ -25,10 +26,10 @@ int my_getline(char arr[], int max){
     else
       ;
   }
-  switch (arr[len]){
-    case '\t':
+  switch (c){
+    case '\n':
       arr[len] = '\n';
-    case ' ':
+    case EOF:
       arr[len] = '\n';
     default:
       ++len;
