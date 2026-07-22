@@ -28,42 +28,42 @@ int my_getline(char arr[], int max){
   switch (c){
     case '\n':
       arr[len] = '\n';
-    case EOF:
-      arr[len] = '\n';
-    default:
       ++len;
-      arr[len] = '\0';
+      break;
+    case EOF:
+      break;
+    default:
+      break;
   }
  //returns the amount of characters in the string
   return (len - 1);
 }
 // indizes cooked
 int reverse(char string[], char rString[]){
-  int indexS= 0;
-  int indexR = 0;
-  while (string[indexS] != '\0'){
+  int indexS = 0;
+  while(string[indexS] != '\0'){
     ++indexS;
   }
-  printf("%d\n", indexS);
-  while (indexS != 0){
+  int len = indexS;
+
+  int indexR = 0;
+  for(indexS = len - 1; indexS >= 0; --indexS){
     rString[indexR] = string[indexS];
-    --indexS;
     ++indexR;
   }
-  ++indexR;
-  printf("%d\n", indexR);
   rString[indexR] = '\0';
+
   return 0;
 }
-
+  
 int main(void){
   char line[MAXLEN];
   char rString[MAXLEN];
   int len;
   while((len = my_getline(line, MAXLEN)) != 0){
-    printf("%s\n", line);
-    printf("%d\n", reverse(line, rString));
-//    printf("%s\n", rString);
+    printf("%s", line);
+    reverse(line, rString);
+    printf("%s\n", rString);
   }
 }
 
