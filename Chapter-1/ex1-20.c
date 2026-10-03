@@ -24,7 +24,7 @@ int myGetLine(){
 
   int col = 0, c = 0, step = 0, nCol = 0, len = 0;
   extern char line[];
-
+  //loop needs to improve -> MAXLINE? Last character != EOF|newline 
   while((c = getchar()) != EOF){
 
     if(c == '\t'){
