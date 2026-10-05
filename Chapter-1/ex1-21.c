@@ -1,12 +1,24 @@
 // entab returns the amount of elements in line[] except '\0'
+#include<stdio.h>
+#define TABSTOP 8
+#define MAXLINE 1000
+
+int getSpaces(){
+  int spaces, c;
+  while ((c = getchar()) == ' '){
+    ++spaces;
+  }
+  return spaces;
+}
+
 int entab(char line[]){
-  int c;
+  int c, len;
   int column = 0;
   while ((c=getchar()) != EOF && c != '\n'){
     switch(c){
       case ' ':
-        int space = getSpaces();
-        while(spaces % TABSTOP) != 0){
+        int spaces = getSpaces();
+        while((spaces % TABSTOP) != 0){
           line[column] = ' ';
           ++column;
           --spaces;
@@ -20,7 +32,7 @@ int entab(char line[]){
         ++column;
     }
   }
-  if(col == 0 && c == '\n'){
+  if(column == 0 && c == '\n'){
     return 0;
   }
   else if(c == '\n'){
@@ -34,21 +46,16 @@ int entab(char line[]){
     return column;
   }
 }
-case '\n':
-
-
-int getSpaces(){
-  int spaces;
-  while ((c = getchar()) == ' '){
-    ++spaces;
-  }
-  return spaces;
-}
 
 int main(void){
-  int len = 0, i = 0;
-  while(len > 0){
-    while(line[i] != '\0')
+  int len, i = 0;
+  char line[MAXLINE];
+  while(len = entab(line) > 0){
+    while(line[i] != '\0'){
+      putchar(line[i]);
+      ++i;
+    }
+    i = 0;
   }
 }
 
