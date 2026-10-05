@@ -1,55 +1,55 @@
-
-
-
-/*
- *                                           NEEDS IMPROVEMENT
- *
- * Tabs are replaced by spaces. Returns number of characters, excluding the '\0' at the end of the line 
- */
-int myGetLine(){
-
-  int col = 0, c = 0, step = 0, nCol = 0, len = 0;
-  extern char line[];
-  //loop needs to improve -> MAXLINE? Last character != EOF|newline 
-  while((c = getchar()) != EOF){
-
-    if(c == '\t'){
-      step = TABSTOP - (col % TABSTOP);
-      nCol = col + step;
-      while(col != nCol){
-        line[col] = ' ';
-        ++col;
-      }
-    }
-    else if(c == '\n'){
-      line[col] = '\n';
-      len = col;
-      ++col;
-      break;
-    }
-    else{
-      line[col] = c;
-      ++col;
-    }
-  }
-  line[col] = '\0';
-  return len;
-}
-
-#define IN 1
-#define OUT 0
+// entab returns the amount of elements in line[] except '\0'
 int entab(char line[]){
-  int c,mode;
-  while ((c=getchar()) != EOF){
-    //Track if in or outside word
+  int c;
+  int column = 0;
+  while ((c=getchar()) != EOF && c != '\n'){
     switch(c){
       case ' ':
-        mode = OUT;
-      case '\t':
-        mode = IN;
-      case '\n':
+        int space = getSpaces();
+        while(spaces % TABSTOP) != 0){
+          line[column] = ' ';
+          ++column;
+          --spaces;
+        }
+        for(int i = 0;i < spaces/TABSTOP; i=(i+TABSTOP)){
+          line[column] = '\t';
+          ++column;
+        }
       default:
+        line[column] = c;
+        ++column;
     }
   }
-  return len;
+  if(col == 0 && c == '\n'){
+    return 0;
+  }
+  else if(c == '\n'){
+    line[column] = '\n';  
+    ++column;
+    len = column;
+    return len;
+  }
+  else{ //in case EOF
+
+    return column;
+  }
 }
+case '\n':
+
+
+int getSpaces(){
+  int spaces;
+  while ((c = getchar()) == ' '){
+    ++spaces;
+  }
+  return spaces;
+}
+
+int main(void){
+  int len = 0, i = 0;
+  while(len > 0){
+    while(line[i] != '\0')
+  }
+}
+
+
