@@ -68,27 +68,22 @@ int entab(char in[], char out[]){
           ++spaces;
           ++j;
         }
-        while(spaces > 0){
-          if(((i+1) % TABSTOP) != 0){
-            out[col2] = ' ';
+        //replace spaces with tabs
+        while (spaces < 0){
+        int nextTabstop = TABSTOP - (i % TABSTOP);
+          if (spaces >= nextTabstop){
+            out[col2] =  '\t';
             ++col2;
-            ++i;
-            --spaces;
-          }
-          else if(((i+1) % TABSTOP != 0) && ((spaces - TABSTOP) >= 0)){
-            out[col2] = '\t';
-            i = i + TABSTOP;
-            ++col2;
-            spaces = spaces - TABSTOP;
+            spaces = spaces - nextTabstop;
+            i = i+TABSTOP;
           }
           else{
             out[col2] = ' ';
-            ++col2;
-            ++i;
+            ++i;++col2;
             --spaces;
           }
         }
-        out[col2] = in[i];
+        --i;
         break;
       case '\0':
         out[col2] = '\0';
